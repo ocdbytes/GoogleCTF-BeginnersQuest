@@ -1,7 +1,7 @@
 # Google CTF Beginners Quest
 
 ### Task 1 : CHEMICAL PLANT CCTV REV
-
+LINK : https://cctv-web.2021.ctfcompetition.com/
 ```js
 /*
 Task - 1
