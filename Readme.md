@@ -38,3 +38,10 @@ console.log(ans);
 ```
 
 **ANS : GoodPassword**
+
+### Task 2 : APARTMENT LOGIC LOCK
+
+<img src="./logic-lock.png" width="100%"></img>
+
+**ANS : CTF{BCFIJ}**
+
