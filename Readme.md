@@ -45,3 +45,36 @@ console.log(ans);
 
 **ANS : CTF{BCFIJ}**
 
+
+### Task 3 : HIGH SPEED CHASE
+
+```js
+function controlCar(scanArray) {
+     // We need to calculate the maximum distance of the nearest obstacle 
+     let max_distance = scanArray[0]
+     let max_distance_index = 0
+     for (let i = 0; i < 17; i++){
+        if(max_distance < scanArray[i]){
+            max_distance = scanArray[i];
+            max_distance_index = i;
+        }
+     }
+     
+     // if max distance is equal for 7,8,9 indexes then move straight
+     if (max_distance == scanArray[7] && max_distance == scanArray[8] && max_distance == scanArray[9]){
+        return 0;
+     }
+
+     if (max_distance_index < 8){
+        return -1;
+     }
+
+     if(max_distance_index > 8){
+        return 1;
+     }
+     
+     return 1;
+}
+```
+
+**ANS : CTF{cbe138a2cd7bd97ab726ebd67e3b7126707f3e7f}**
