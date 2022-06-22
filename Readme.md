@@ -1,6 +1,6 @@
 # Google CTF Beginners Quest
 
-### Task 1 : CHEMICAL PLANT CCTV REV
+### Task 1 : CHEMICAL PLANT CCTV (REV)
 LINK : https://cctv-web.2021.ctfcompetition.com/
 ```js
 /*
@@ -39,14 +39,14 @@ console.log(ans);
 
 **ANS : GoodPassword**
 
-### Task 2 : APARTMENT LOGIC LOCK
+### Task 2 : APARTMENT LOGIC LOCK (MISC)
 
 <img src="./logic-lock.png" width="100%"></img>
 
 **ANS : CTF{BCFIJ}**
 
 
-### Task 3 : HIGH SPEED CHASE
+### Task 3 : HIGH SPEED CHASE (MISC)
 
 ```js
 function controlCar(scanArray) {
@@ -78,3 +78,75 @@ function controlCar(scanArray) {
 ```
 
 **ANS : CTF{cbe138a2cd7bd97ab726ebd67e3b7126707f3e7f}**
+
+
+### Task 5 : TWISTED ROBOT (MISC)
+
+**///code avialable above in folder named "twisted robot"///**
+
+The vulnerable function is **getrandbits** which is there in the encodeSecret function
+Now we can decrypt our secret using this method :
+
+https://github.com/eboda/mersenne-twister-recover
+
+Now we need to write our script to decode our secret. As we read from th readme we need 624 set of integers in order to decrypt our secret and if we notice we will see that there are 624 phone numbers now we will make array out of the 624 phone numbers and format them as below ->
+
+**arrayNum.py**
+
+```python
+array_num = [2631706234 - (1<<31),
+4675537030 - (1<<31),
+2201461293 - (1<<31),
+6303286023 - (1<<31),
+4135530465 - (1<<31),
+5284036609 - (1<<31),
+4546416157 - (1<<31),
+3969061900 - (1<<31),
+...
+...
+...]
+```
+
+Now we need to Clone the repo above into our folder in order to use the function.
+
+```bash
+git clone https://github.com/eboda/mersenne-twister-recover
+```
+
+Now we will write our script ->
+
+**exploit.py**
+
+Take the code given in the readme of the repo and modify it
+
+```python
+from MTRecover import MT19937Recover
+from arrayNum import array_num
+# Not needed
+# r1 = random.Random(31337)
+# outputs = [r1.getrandbits(32) for _ in range(625)]
+
+mtr = MT19937Recover()
+r2 = mtr.go(array_num)
+
+# Write our encode function here
+# We removed the encode function because we don't need to do that
+
+
+def encodeSecret(s):
+    key = [r2.getrandbits(8) for i in range(len(s))]
+    return bytes([a ^ b for a, b in zip(key, s)])
+
+
+# Now opening/creating our secret.enc file
+with open("secret.enc", "rb") as f:
+    data = f.read()
+
+print(encodeSecret(data))
+
+# assert r1.getrandbits(32) == r2.getrandbits(32)
+```
+
+**ANS : CTF{n3v3r_3ver_ev3r_use_r4nd0m}**
+
+
