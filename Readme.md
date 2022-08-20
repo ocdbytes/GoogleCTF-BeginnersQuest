@@ -225,6 +225,8 @@ http://www.libpng.org/pub/png/spec/1.2/PNG-Chunks.html
 
 Here as we can see that there is and eDIH chunk which contains the image data chunks
 
+<img src="./hideandseek/hideandseek1.png"></img>
+
 Now the layout of the eDIH chunk is something like this
 
 ```txt
@@ -266,3 +268,5 @@ print(flag)
 
 print(base64.b64decode(flag))
 ```
+
+**ANS : CTF{DidYouKnowPNGisPronouncedPING?}**
